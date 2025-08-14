@@ -1,0 +1,34 @@
+function [Xref,ZMPRef] = MpcLIPOnlineAccConstraintsV2(gait_parameters,X0,Zref,k,Px,Pu)
+    Tstep = gait_parameters.T; %Time step
+    z = gait_parameters.z_i; %height
+    g = gait_parameters.g;
+    T = 0.005; %time step
+    Thorizon = gait_parameters.Thorizon;
+    alpha=0.001;
+    gamma=1;
+    N = round(Thorizon/T); %horizon, also number of samples of one step
+    A = [1 T; 0 1];
+    B = [(T^2)/2; T];
+    C = [1 0];
+    D = -z/g;
+    xk = [X0(1);X0(3)];
+    yk = [X0(2);X0(4)];
+    Q = eye(N+1,N+1)*alpha + gamma*(Pu'*Pu);
+    limX = gait_parameters.limX;
+    limY = gait_parameters.limY;
+    Aineq = [Pu;-Pu];
+    bineqX = [limX(2)*ones(N,1) - Px*xk;-limX(1)*ones(N,1) + Px*xk];
+    bineqY = [limY(2)*ones(N,1) - Px*yk;-limY(1)*ones(N,1) + Px*yk];
+    %
+    options = optimset('Display', 'off');
+    pkX = gamma*Pu'*(Px*xk-Zref(1,k:N+k-1)');
+    pkY = gamma*Pu'*(Px*yk-Zref(2,k:N+k-1)');
+    xpp = quadprog(Q,pkX,Aineq,bineqX,[],[],[],[],[],options);
+    ypp = quadprog(Q,pkY,Aineq,bineqY,[],[],[],[],[],options);
+    xkNew = A*xk + B*xpp(1);
+    ykNew = A*yk + B*ypp(1);
+    ZMPRefXNew = C*xkNew + D*xpp(2); 
+    ZMPRefYNew = C*ykNew + D*ypp(2);
+    Xref = [xkNew;xpp(1);ykNew;ypp(1)];
+    ZMPRef = [ZMPRefXNew;ZMPRefYNew];
+end

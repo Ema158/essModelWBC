@@ -1,0 +1,436 @@
+% Reducing torque by otimization for the Essential model
+% ==============================
+% Creation: 02/jun/2018
+% Last modification: --/--/----
+% -----------------------------------------------------------------------
+% Reducing torque by otimization for the Essential model
+% -----------------------------------------------------------------------
+%
+% ------------------------------------------------------------------------------------------------------------
+echo off;
+All masses distributed (as it should be), i.e. alphaM = 1.000000
+
+-------------- OBJECTIVE FUNCTION FILE -------------------
+17:12:16 -> Cycle k = 1 (of 700 maximum) for the EssentialModel 
+Performing one step of the robot
+Proposed fixed point values [Dx, Dy, xpf, ypf] = [-0.001384,0.000260,0.078451,0.236969]
+No parameters to be optimized
+-----------------------------------------------------
+The linear velocity of the free foot before impact is:
+ xp = 0.000000 
+ yp = 0.000000 
+ zp = -0.050000 
+After impact max(|Q(q)+ - Q_d(Phi)+|) = 0.000000e+00
+After impact max(|Qp(q,qp)+ - Qp_d(Phi,Phip)+|) = 0.000000e+00 
+Iteration: 2, t = 0.000000, CoM_x = -0.021343,  CoM_y = 0.049738,  CoM_xp = 0.077094,  CoM_yp = -0.235784
+Foot height = -0.000000
+Iteration: 8, t = 0.001000, CoM_x = -0.021266,  CoM_y = 0.049503,  CoM_xp = 0.077003,  CoM_yp = -0.234285
+Foot height = 0.000020
+Iteration: 14, t = 0.006000, CoM_x = -0.020883,  CoM_y = 0.048350,  CoM_xp = 0.076512,  CoM_yp = -0.226914
+Foot height = 0.000175
+Iteration: 20, t = 0.027820, CoM_x = -0.019242,  CoM_y = 0.043732,  CoM_xp = 0.073613,  CoM_yp = -0.196918
+Foot height = 0.001749
+Iteration: 26, t = 0.049648, CoM_x = -0.017679,  CoM_y = 0.039734,  CoM_xp = 0.069443,  CoM_yp = -0.169854
+Foot height = 0.004465
+Iteration: 32, t = 0.072541, CoM_x = -0.016152,  CoM_y = 0.036145,  CoM_xp = 0.063721,  CoM_yp = -0.144032
+Foot height = 0.008110
+Iteration: 38, t = 0.096465, CoM_x = -0.014713,  CoM_y = 0.032998,  CoM_xp = 0.056302,  CoM_yp = -0.119408
+Foot height = 0.012363
+Iteration: 44, t = 0.119249, CoM_x = -0.013524,  CoM_y = 0.030526,  CoM_xp = 0.047847,  CoM_yp = -0.097869
+Foot height = 0.016482
+Iteration: 50, t = 0.141166, CoM_x = -0.012577,  CoM_y = 0.028595,  CoM_xp = 0.038350,  CoM_yp = -0.078633
+Foot height = 0.020235
+Iteration: 56, t = 0.162354, CoM_x = -0.011874,  CoM_y = 0.027115,  CoM_xp = 0.027763,  CoM_yp = -0.061185
+Foot height = 0.023467
+Iteration: 62, t = 0.182799, CoM_x = -0.011423,  CoM_y = 0.026029,  CoM_xp = 0.016082,  CoM_yp = -0.045207
+Foot height = 0.026074
+Iteration: 68, t = 0.201241, CoM_x = -0.011234,  CoM_y = 0.025324,  CoM_xp = 0.004175,  CoM_yp = -0.031351
+Foot height = 0.027904
+Iteration: 74, t = 0.217185, CoM_x = -0.011258,  CoM_y = 0.024917,  CoM_xp = -0.007269,  CoM_yp = -0.019679
+Foot height = 0.029043
+Iteration: 80, t = 0.231275, CoM_x = -0.011437,  CoM_y = 0.024711,  CoM_xp = -0.018333,  CoM_yp = -0.009524
+Foot height = 0.029687
+Iteration: 86, t = 0.246834, CoM_x = -0.011824,  CoM_y = 0.024650,  CoM_xp = -0.031645,  CoM_yp = 0.001598
+Foot height = 0.029991
+Iteration: 92, t = 0.260609, CoM_x = -0.012347,  CoM_y = 0.024740,  CoM_xp = -0.044432,  CoM_yp = 0.011432
+Foot height = 0.029900
+Iteration: 98, t = 0.274751, CoM_x = -0.013074,  CoM_y = 0.024973,  CoM_xp = -0.058567,  CoM_yp = 0.021582
+Foot height = 0.029458
+Iteration: 104, t = 0.290796, CoM_x = -0.014151,  CoM_y = 0.025412,  CoM_xp = -0.075863,  CoM_yp = 0.033241
+Foot height = 0.028543
+Iteration: 110, t = 0.308276, CoM_x = -0.015653,  CoM_y = 0.026106,  CoM_xp = -0.096237,  CoM_yp = 0.046221
+Foot height = 0.027072
+Iteration: 116, t = 0.326937, CoM_x = -0.017665,  CoM_y = 0.027102,  CoM_xp = -0.119734,  CoM_yp = 0.060520
+Foot height = 0.025006
+Iteration: 122, t = 0.346632, CoM_x = -0.020283,  CoM_y = 0.028447,  CoM_xp = -0.146427,  CoM_yp = 0.076254
+Foot height = 0.022347
+Iteration: 128, t = 0.367319, CoM_x = -0.023619,  CoM_y = 0.030203,  CoM_xp = -0.176446,  CoM_yp = 0.093666
+Foot height = 0.019136
+Iteration: 134, t = 0.388451, CoM_x = -0.027689,  CoM_y = 0.032380,  CoM_xp = -0.209012,  CoM_yp = 0.112601
+Foot height = 0.015563
+Iteration: 140, t = 0.409251, CoM_x = -0.032384,  CoM_y = 0.034928,  CoM_xp = -0.242647,  CoM_yp = 0.132669
+Foot height = 0.011929
+Iteration: 152, t = 0.420678, CoM_x = -0.035264,  CoM_y = 0.036511,  CoM_xp = -0.261614,  CoM_yp = 0.144493
+Foot height = 0.009952
+Iteration: 158, t = 0.432104, CoM_x = -0.038363,  CoM_y = 0.038234,  CoM_xp = -0.280711,  CoM_yp = 0.157163
+Foot height = 0.008035
+Iteration: 170, t = 0.438209, CoM_x = -0.040108,  CoM_y = 0.039215,  CoM_xp = -0.290820,  CoM_yp = 0.164487
+Foot height = 0.007047
+Iteration: 182, t = 0.443035, CoM_x = -0.041530,  CoM_y = 0.040024,  CoM_xp = -0.298626,  CoM_yp = 0.170754
+Foot height = 0.006289
+Iteration: 194, t = 0.446584, CoM_x = -0.042600,  CoM_y = 0.040639,  CoM_xp = -0.304134,  CoM_yp = 0.175832
+Foot height = 0.005747
+Iteration: 206, t = 0.449260, CoM_x = -0.043419,  CoM_y = 0.041115,  CoM_xp = -0.308020,  CoM_yp = 0.180128
+Foot height = 0.005347
+Iteration: 218, t = 0.451257, CoM_x = -0.044036,  CoM_y = 0.041478,  CoM_xp = -0.310633,  CoM_yp = 0.183803
+Foot height = 0.005054
+Iteration: 230, t = 0.452750, CoM_x = -0.044502,  CoM_y = 0.041755,  CoM_xp = -0.312287,  CoM_yp = 0.187027
+Foot height = 0.004838
+Iteration: 242, t = 0.453865, CoM_x = -0.044850,  CoM_y = 0.041965,  CoM_xp = -0.313209,  CoM_yp = 0.189916
+Foot height = 0.004679
+Iteration: 254, t = 0.454697, CoM_x = -0.045111,  CoM_y = 0.042124,  CoM_xp = -0.313572,  CoM_yp = 0.192557
+Foot height = 0.004561
+Iteration: 266, t = 0.455319, CoM_x = -0.045306,  CoM_y = 0.042244,  CoM_xp = -0.313503,  CoM_yp = 0.195018
+Foot height = 0.004474
+Iteration: 278, t = 0.455782, CoM_x = -0.045451,  CoM_y = 0.042335,  CoM_xp = -0.313094,  CoM_yp = 0.197347
+Foot height = 0.004409
+Iteration: 290, t = 0.456128, CoM_x = -0.045559,  CoM_y = 0.042404,  CoM_xp = -0.312410,  CoM_yp = 0.199578
+Foot height = 0.004361
+Iteration: 302, t = 0.456385, CoM_x = -0.045640,  CoM_y = 0.042456,  CoM_xp = -0.311493,  CoM_yp = 0.201738
+Foot height = 0.004325
+Iteration: 314, t = 0.456576, CoM_x = -0.045699,  CoM_y = 0.042494,  CoM_xp = -0.310369,  CoM_yp = 0.203837
+Foot height = 0.004299
+Iteration: 326, t = 0.456711, CoM_x = -0.045741,  CoM_y = 0.042522,  CoM_xp = -0.309117,  CoM_yp = 0.205782
+Foot height = 0.004280
+Iteration: 338, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456881, CoM_x = -0.045793,  CoM_y = 0.042557,  CoM_xp = -0.306243,  CoM_yp = 0.209311
+Foot height = 0.004257
+Iteration: 350, t = 0.456845, CoM_x = -0.045782,  CoM_y = 0.042550,  CoM_xp = -0.307060,  CoM_yp = 0.208412
+Foot height = 0.004262
+Iteration: 350, t = 0.456828, CoM_x = -0.045777,  CoM_y = 0.042546,  CoM_xp = -0.307412,  CoM_yp = 0.208003
+Foot height = 0.004264
+Iteration: 350, t = 0.456819, CoM_x = -0.045774,  CoM_y = 0.042544,  CoM_xp = -0.307576,  CoM_yp = 0.207806
+Foot height = 0.004265
+Iteration: 350, t = 0.456814, CoM_x = -0.045773,  CoM_y = 0.042543,  CoM_xp = -0.307655,  CoM_yp = 0.207710
+Foot height = 0.004266
+Iteration: 350, t = 0.456812, CoM_x = -0.045772,  CoM_y = 0.042543,  CoM_xp = -0.307694,  CoM_yp = 0.207662
+Foot height = 0.004266
+Iteration: 350, t = 0.456811, CoM_x = -0.045772,  CoM_y = 0.042543,  CoM_xp = -0.307714,  CoM_yp = 0.207639
+Foot height = 0.004266
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307723,  CoM_yp = 0.207627
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307728,  CoM_yp = 0.207621
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307731,  CoM_yp = 0.207618
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307732,  CoM_yp = 0.207617
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307732,  CoM_yp = 0.207616
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Robot configuration is INACCESSIBLE in "robot_step...m". Robot configuration RE-Initialized
+Final states Step {k-1} = [0.018616,0.050260,0.078451,0.236969]
+Initial states Step {k} = [-0.021343,0.049738,0.077094,-0.235784]
+Final states Step {k} = [-0.045771,0.042542,-0.307733,0.207615]
+NO LANDING ->  Integration stopped because the robot configuration is unaccesible (Check PEvents_HDZtime.m)
+--------------------------------------------------------------------------------------------
+NO COMPUTATION OF TORQUES was performed. A high value for cost function was defined....
+--------------------------------------------------------------------------------------------
+-------------------------------------
+NO LANDING -> Objective function J = 400000.000000
+-------------------------------------
+
+-------------- OBJECTIVE FUNCTION FILE -------------------
+17:12:24 -> Cycle k = 2 (of 700 maximum) for the EssentialModel 
+Performing one step of the robot
+Proposed fixed point values [Dx, Dy, xpf, ypf] = [-0.001384,0.000260,0.078451,0.236969]
+No parameters to be optimized
+-----------------------------------------------------
+The linear velocity of the free foot before impact is:
+ xp = 0.000000 
+ yp = 0.000000 
+ zp = -0.050000 
+After impact max(|Q(q)+ - Q_d(Phi)+|) = 0.000000e+00
+After impact max(|Qp(q,qp)+ - Qp_d(Phi,Phip)+|) = 0.000000e+00 
+Iteration: 2, t = 0.000000, CoM_x = -0.021343,  CoM_y = 0.049738,  CoM_xp = 0.077094,  CoM_yp = -0.235784
+Foot height = -0.000000
+Iteration: 8, t = 0.001000, CoM_x = -0.021266,  CoM_y = 0.049503,  CoM_xp = 0.077003,  CoM_yp = -0.234285
+Foot height = 0.000020
+Iteration: 14, t = 0.006000, CoM_x = -0.020883,  CoM_y = 0.048350,  CoM_xp = 0.076512,  CoM_yp = -0.226914
+Foot height = 0.000175
+Iteration: 20, t = 0.027820, CoM_x = -0.019242,  CoM_y = 0.043732,  CoM_xp = 0.073613,  CoM_yp = -0.196918
+Foot height = 0.001749
+Iteration: 26, t = 0.049648, CoM_x = -0.017679,  CoM_y = 0.039734,  CoM_xp = 0.069443,  CoM_yp = -0.169854
+Foot height = 0.004465
+Iteration: 32, t = 0.072541, CoM_x = -0.016152,  CoM_y = 0.036145,  CoM_xp = 0.063721,  CoM_yp = -0.144032
+Foot height = 0.008110
+Iteration: 38, t = 0.096465, CoM_x = -0.014713,  CoM_y = 0.032998,  CoM_xp = 0.056302,  CoM_yp = -0.119408
+Foot height = 0.012363
+Iteration: 44, t = 0.119249, CoM_x = -0.013524,  CoM_y = 0.030526,  CoM_xp = 0.047847,  CoM_yp = -0.097869
+Foot height = 0.016482
+Iteration: 50, t = 0.141166, CoM_x = -0.012577,  CoM_y = 0.028595,  CoM_xp = 0.038350,  CoM_yp = -0.078633
+Foot height = 0.020235
+Iteration: 56, t = 0.162354, CoM_x = -0.011874,  CoM_y = 0.027115,  CoM_xp = 0.027762,  CoM_yp = -0.061185
+Foot height = 0.023467
+Iteration: 62, t = 0.182799, CoM_x = -0.011423,  CoM_y = 0.026029,  CoM_xp = 0.016082,  CoM_yp = -0.045207
+Foot height = 0.026074
+Iteration: 68, t = 0.201241, CoM_x = -0.011234,  CoM_y = 0.025324,  CoM_xp = 0.004175,  CoM_yp = -0.031351
+Foot height = 0.027904
+Iteration: 74, t = 0.217185, CoM_x = -0.011258,  CoM_y = 0.024917,  CoM_xp = -0.007269,  CoM_yp = -0.019679
+Foot height = 0.029043
+Iteration: 80, t = 0.231275, CoM_x = -0.011437,  CoM_y = 0.024711,  CoM_xp = -0.018333,  CoM_yp = -0.009524
+Foot height = 0.029687
+Iteration: 86, t = 0.246834, CoM_x = -0.011824,  CoM_y = 0.024650,  CoM_xp = -0.031645,  CoM_yp = 0.001598
+Foot height = 0.029991
+Iteration: 92, t = 0.260609, CoM_x = -0.012347,  CoM_y = 0.024740,  CoM_xp = -0.044433,  CoM_yp = 0.011432
+Foot height = 0.029900
+Iteration: 98, t = 0.274751, CoM_x = -0.013074,  CoM_y = 0.024973,  CoM_xp = -0.058567,  CoM_yp = 0.021582
+Foot height = 0.029458
+Iteration: 104, t = 0.290796, CoM_x = -0.014151,  CoM_y = 0.025412,  CoM_xp = -0.075863,  CoM_yp = 0.033241
+Foot height = 0.028543
+Iteration: 110, t = 0.308276, CoM_x = -0.015653,  CoM_y = 0.026106,  CoM_xp = -0.096238,  CoM_yp = 0.046220
+Foot height = 0.027072
+Iteration: 116, t = 0.326937, CoM_x = -0.017665,  CoM_y = 0.027102,  CoM_xp = -0.119734,  CoM_yp = 0.060520
+Foot height = 0.025006
+Iteration: 122, t = 0.346632, CoM_x = -0.020283,  CoM_y = 0.028447,  CoM_xp = -0.146427,  CoM_yp = 0.076254
+Foot height = 0.022347
+Iteration: 128, t = 0.367319, CoM_x = -0.023619,  CoM_y = 0.030203,  CoM_xp = -0.176447,  CoM_yp = 0.093666
+Foot height = 0.019136
+Iteration: 134, t = 0.388451, CoM_x = -0.027689,  CoM_y = 0.032380,  CoM_xp = -0.209012,  CoM_yp = 0.112601
+Foot height = 0.015563
+Iteration: 140, t = 0.409251, CoM_x = -0.032384,  CoM_y = 0.034928,  CoM_xp = -0.242647,  CoM_yp = 0.132669
+Foot height = 0.011929
+Iteration: 152, t = 0.420678, CoM_x = -0.035264,  CoM_y = 0.036511,  CoM_xp = -0.261615,  CoM_yp = 0.144492
+Foot height = 0.009952
+Iteration: 158, t = 0.432104, CoM_x = -0.038363,  CoM_y = 0.038234,  CoM_xp = -0.280711,  CoM_yp = 0.157163
+Foot height = 0.008035
+Iteration: 170, t = 0.438209, CoM_x = -0.040108,  CoM_y = 0.039215,  CoM_xp = -0.290820,  CoM_yp = 0.164487
+Foot height = 0.007047
+Iteration: 182, t = 0.443035, CoM_x = -0.041530,  CoM_y = 0.040024,  CoM_xp = -0.298626,  CoM_yp = 0.170754
+Foot height = 0.006289
+Iteration: 194, t = 0.446584, CoM_x = -0.042600,  CoM_y = 0.040639,  CoM_xp = -0.304134,  CoM_yp = 0.175832
+Foot height = 0.005747
+Iteration: 206, t = 0.449260, CoM_x = -0.043419,  CoM_y = 0.041115,  CoM_xp = -0.308020,  CoM_yp = 0.180128
+Foot height = 0.005347
+Iteration: 218, t = 0.451256, CoM_x = -0.044036,  CoM_y = 0.041478,  CoM_xp = -0.310633,  CoM_yp = 0.183803
+Foot height = 0.005054
+Iteration: 230, t = 0.452750, CoM_x = -0.044502,  CoM_y = 0.041755,  CoM_xp = -0.312287,  CoM_yp = 0.187027
+Foot height = 0.004838
+Iteration: 242, t = 0.453865, CoM_x = -0.044850,  CoM_y = 0.041965,  CoM_xp = -0.313209,  CoM_yp = 0.189915
+Foot height = 0.004679
+Iteration: 254, t = 0.454697, CoM_x = -0.045111,  CoM_y = 0.042124,  CoM_xp = -0.313572,  CoM_yp = 0.192557
+Foot height = 0.004561
+Iteration: 266, t = 0.455319, CoM_x = -0.045306,  CoM_y = 0.042244,  CoM_xp = -0.313503,  CoM_yp = 0.195018
+Foot height = 0.004474
+Iteration: 278, t = 0.455782, CoM_x = -0.045451,  CoM_y = 0.042335,  CoM_xp = -0.313094,  CoM_yp = 0.197346
+Foot height = 0.004409
+Iteration: 290, t = 0.456127, CoM_x = -0.045559,  CoM_y = 0.042404,  CoM_xp = -0.312411,  CoM_yp = 0.199578
+Foot height = 0.004361
+Iteration: 302, t = 0.456385, CoM_x = -0.045640,  CoM_y = 0.042455,  CoM_xp = -0.311493,  CoM_yp = 0.201738
+Foot height = 0.004325
+Iteration: 314, t = 0.456576, CoM_x = -0.045699,  CoM_y = 0.042494,  CoM_xp = -0.310369,  CoM_yp = 0.203837
+Foot height = 0.004299
+Iteration: 326, t = 0.456711, CoM_x = -0.045741,  CoM_y = 0.042522,  CoM_xp = -0.309118,  CoM_yp = 0.205781
+Foot height = 0.004280
+Iteration: 338, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456881, CoM_x = -0.045793,  CoM_y = 0.042557,  CoM_xp = -0.306243,  CoM_yp = 0.209311
+Foot height = 0.004257
+Iteration: 350, t = 0.456845, CoM_x = -0.045782,  CoM_y = 0.042550,  CoM_xp = -0.307060,  CoM_yp = 0.208412
+Foot height = 0.004262
+Iteration: 350, t = 0.456827, CoM_x = -0.045777,  CoM_y = 0.042546,  CoM_xp = -0.307412,  CoM_yp = 0.208002
+Foot height = 0.004264
+Iteration: 350, t = 0.456818, CoM_x = -0.045774,  CoM_y = 0.042544,  CoM_xp = -0.307576,  CoM_yp = 0.207806
+Foot height = 0.004265
+Iteration: 350, t = 0.456814, CoM_x = -0.045773,  CoM_y = 0.042543,  CoM_xp = -0.307655,  CoM_yp = 0.207710
+Foot height = 0.004266
+Iteration: 350, t = 0.456812, CoM_x = -0.045772,  CoM_y = 0.042543,  CoM_xp = -0.307694,  CoM_yp = 0.207662
+Foot height = 0.004266
+Iteration: 350, t = 0.456811, CoM_x = -0.045772,  CoM_y = 0.042543,  CoM_xp = -0.307714,  CoM_yp = 0.207639
+Foot height = 0.004266
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307723,  CoM_yp = 0.207627
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307728,  CoM_yp = 0.207621
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307731,  CoM_yp = 0.207618
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307732,  CoM_yp = 0.207616
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307732,  CoM_yp = 0.207616
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Iteration: 350, t = 0.456810, CoM_x = -0.045771,  CoM_y = 0.042542,  CoM_xp = -0.307733,  CoM_yp = 0.207615
+Foot height = 0.004267
+Robot configuration is INACCESSIBLE in "robot_step...m". Robot configuration RE-Initialized
+Final states Step {k-1} = [0.018616,0.050260,0.078451,0.236969]
+Initial states Step {k} = [-0.021343,0.049738,0.077094,-0.235784]
+Final states Step {k} = [-0.045771,0.042542,-0.307733,0.207615]
+NO LANDING ->  Integration stopped because the robot configuration is unaccesible (Check PEvents_HDZtime.m)
+--------------------------------------------------------------------------------------------
+NO COMPUTATION OF TORQUES was performed. A high value for cost function was defined....
+--------------------------------------------------------------------------------------------
+-------------------------------------
+NO LANDING -> Objective function J = 40000000.000000
+-------------------------------------
+
+-------------- OBJECTIVE FUNCTION FILE -------------------
+17:12:31 -> Cycle k = 3 (of 700 maximum) for the EssentialModel 
+Performing one step of the robot
+Proposed fixed point values [Dx, Dy, xpf, ypf] = [-0.001384,0.000260,0.078451,0.236969]
+No parameters to be optimized
+-----------------------------------------------------
+The linear velocity of the free foot before impact is:
+ xp = 0.000000 
+ yp = 0.000000 
+ zp = -0.050000 
+After impact max(|Q(q)+ - Q_d(Phi)+|) = 0.000000e+00
+After impact max(|Qp(q,qp)+ - Qp_d(Phi,Phip)+|) = 0.000000e+00 
+Iteration: 2, t = 0.000000, CoM_x = -0.021343,  CoM_y = 0.049738,  CoM_xp = 0.077094,  CoM_yp = -0.235784
+Foot height = -0.000000
+Iteration: 8, t = 0.001000, CoM_x = -0.021266,  CoM_y = 0.049503,  CoM_xp = 0.077003,  CoM_yp = -0.234285
+Foot height = 0.000020
+Iteration: 14, t = 0.006000, CoM_x = -0.020883,  CoM_y = 0.048350,  CoM_xp = 0.076512,  CoM_yp = -0.226914
+Foot height = 0.000175
+Iteration: 20, t = 0.027820, CoM_x = -0.019242,  CoM_y = 0.043732,  CoM_xp = 0.073613,  CoM_yp = -0.196918
+Foot height = 0.001749
+Iteration: 26, t = 0.049648, CoM_x = -0.017679,  CoM_y = 0.039734,  CoM_xp = 0.069443,  CoM_yp = -0.169854
+Foot height = 0.004465
+Iteration: 32, t = 0.072541, CoM_x = -0.016152,  CoM_y = 0.036145,  CoM_xp = 0.063721,  CoM_yp = -0.144032
+Foot height = 0.008110
+Iteration: 38, t = 0.096465, CoM_x = -0.014713,  CoM_y = 0.032998,  CoM_xp = 0.056302,  CoM_yp = -0.119408
+Foot height = 0.012363
+Iteration: 44, t = 0.119249, CoM_x = -0.013524,  CoM_y = 0.030526,  CoM_xp = 0.047847,  CoM_yp = -0.097869
+Foot height = 0.016482
+Iteration: 50, t = 0.141166, CoM_x = -0.012577,  CoM_y = 0.028595,  CoM_xp = 0.038350,  CoM_yp = -0.078634
+Foot height = 0.020235
+Iteration: 56, t = 0.162354, CoM_x = -0.011874,  CoM_y = 0.027115,  CoM_xp = 0.027763,  CoM_yp = -0.061185
+Foot height = 0.023467
+Iteration: 62, t = 0.182799, CoM_x = -0.011423,  CoM_y = 0.026029,  CoM_xp = 0.016082,  CoM_yp = -0.045207
+Foot height = 0.026074
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('OptionDesiredTrajectory', 'C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Modifiable programs\Polynoms\OptionDesiredTrajectory.m', 26)" style="font-weight:bold">OptionDesiredTrajectory</a> (<a href="matlab: opentoline('C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Modifiable programs\Polynoms\OptionDesiredTrajectory.m',26,0)">line 26</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('JointsPosVel_from_CoMPosVel_HZDtime', 'C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\qppf computation\JointsPosVel_from_CoMPosVel_HZDtime.m', 13)" style="font-weight:bold">JointsPosVel_from_CoMPosVel_HZDtime</a> (<a href="matlab: opentoline('C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\qppf computation\JointsPosVel_from_CoMPosVel_HZDtime.m',13,0)">line 13</a>)
+OptionDesiredTrajectory;
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Desired_qfpp_HZDtime', 'C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\Dynamic model\Desired_qfpp_HZDtime.m', 24)" style="font-weight:bold">Desired_qfpp_HZDtime</a> (<a href="matlab: opentoline('C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\Dynamic model\Desired_qfpp_HZDtime.m',24,0)">line 24</a>)
+[q,qD,JPhi,JQ,~] = JointsPosVel_from_CoMPosVel_HZDtime(qf,qfp,robot,gait_parameters,t);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dynam_HZDtime', 'C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\Dynamic model\dynam_HZDtime.m', 107)" style="font-weight:bold">dynam_HZDtime</a> (<a href="matlab: opentoline('C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\Dynamic model\dynam_HZDtime.m',107,0)">line 107</a>)
+    [qfpp, ~, ~, ~, ~, ~, ~] = Desired_qfpp_HZDtime(ZMPd,robot,[qf;qfp],gait_parameters,t);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ode45', 'C:\Program Files\MATLAB\R2017b\toolbox\matlab\funfun\ode45.m', 262)" style="font-weight:bold">ode45</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2017b\toolbox\matlab\funfun\ode45.m',262,0)">line 262</a>)
+    f(:,3) = feval(odeFcn,t+hA(2),y+f*hB(:,2),odeArgs{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('robot_step_EssModel_t', 'C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\robot_step_EssModel_t.m', 100)" style="font-weight:bold">robot_step_EssModel_t</a> (<a href="matlab: opentoline('C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\- Fixed files\robot_step_EssModel_t.m',100,0)">line 100</a>)
+[t,Xt] = ode45(@dynam_HZDtime,0:1e-3:T,X0,options);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Optim_ObjectiveFunctionGeneral', 'C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\Optimization functions\Optim_ObjectiveFunctionGeneral.m', 210)" style="font-weight:bold">Optim_ObjectiveFunctionGeneral</a> (<a href="matlab: opentoline('C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\Optimization functions\Optim_ObjectiveFunctionGeneral.m',210,0)">line 210</a>)
+[t,X0,Xt] = robot_step_EssModel_t(X_final); % "robot" and "gait_parameters" structures are needed inside
+
+In finDiffEvalAndChkErr
+
+In finitedifferences
+
+In computeFinDiffGradAndJac
+
+In sqpInterface
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2017b\toolbox\shared\optimlib\fmincon.p', 810)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2017b\toolbox\shared\optimlib\fmincon.p',810,0)">line 810</a>)
+    [X,FVAL,EXITFLAG,OUTPUT,LAMBDA,GRAD,HESSIAN] = sqpInterface(funfcn,X,full(A),full(B),full(Aeq),full(Beq), ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('M40_EssModelGeneralOptimObjFunction_t', 'C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\Main codes\M40_EssModelGeneralOptimObjFunction_t.m', 183)" style="font-weight:bold">M40_EssModelGeneralOptimObjFunction_t</a> (<a href="matlab: opentoline('C:\Users\emanu\Documents\MATLAB\Nao y Romeo\Nao 1.5\Main codes\M40_EssModelGeneralOptimObjFunction_t.m',183,0)">line 183</a>)
+[R,Func,exitflag,output,lambda,grad,hessian] =
+fmincon('Optim_ObjectiveFunctionGeneral',R0,[],[],[],[],LowerBounds,UpperBounds,'Optim_Constraints',options);
+} 
+M71a_StartingPhase_Optimization_DS_SS_DS_reduced
+Paths for Nao files and "Input data" folder were added =)

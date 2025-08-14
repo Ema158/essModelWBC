@@ -1,0 +1,59 @@
+function [tref,Xref,ZMPRef] = MpcLIP(gait_parameters,X0,Nsteps)
+    Tstep = gait_parameters.T; %Time step
+    z = gait_parameters.z_i; %height
+    S = gait_parameters.S; %step size
+    D = gait_parameters.D; %step width
+    g = gait_parameters.g;
+    T = 0.005; %time step
+    alpha=0.00001;
+    gamma=1;
+    N = round(Tstep/T); %horizon, also number of samples of one step
+%     N = (Nsteps+4)*N; % por mientras
+    A = [1 T (T^2)/2; 0 1 T; 0 0 1];
+    B = [(T^3)/6; (T^2)/2; T];
+    C = [1 0 -z/g];
+    Px = zeros(N,3);
+    Pu = zeros(N,N);
+    for i=1:(N)
+        Px(i,:) = C*A^i;
+        Pu(i,i) = C*B;
+        for j=1:(N-i)
+                 Pu(i+j,j) = C*A^i*B; %Esto puede estar mal (i-j)?
+        end
+    end
+    Zref = ZMPReference(Nsteps,N,S,D);
+    ZMPRefX = zeros(1,(Nsteps+1)*N);
+    ZMPRefY = zeros(1,(Nsteps+1)*N);
+    xkHist = zeros(3,(Nsteps+1)*N);
+    ykHist = zeros(3,(Nsteps+1)*N);
+    xkHist(:,1) = [X0(1);X0(3);0];
+    ykHist(:,1) = [X0(2);X0(4);0];
+    ZMPRefX(1) = xkHist(1,1) - (z/g)*xkHist(3,1);
+    ZMPRefY(1) = ykHist(1,1) - (z/g)*ykHist(3,1);
+    Q = eye(N,N)*alpha + gamma*(Pu'*Pu);
+    options = optimset('Display', 'off');
+    for i=1:(Nsteps+4)*N
+        pkX = gamma*Pu'*(Px*xkHist(:,i)-Zref(1,i:N+i-1)');
+        pkY = gamma*Pu'*(Px*ykHist(:,i)-Zref(2,i:N+i-1)');
+        xppp = quadprog(Q,pkX,[],[],[],[],[],[],[],options);
+        yppp = quadprog(Q,pkY,[],[],[],[],[],[],[],options);
+        xkHist(:,i+1) = A*xkHist(:,i) + B*xppp(1);
+        ykHist(:,i+1) = A*ykHist(:,i) + B*yppp(1);
+        ZMPRefX(i+1) = xkHist(1,i+1) - (z/g)*xkHist(3,i+1);
+        ZMPRefY(i+1) = ykHist(1,i+1) - (z/g)*ykHist(3,i+1);
+    end
+%         pkX = gamma*Pu'*(Px*xkHist(:,i)-Zref(1,i:N+i-1)');
+%         pkY = gamma*Pu'*(Px*ykHist(:,i)-Zref(2,i:N+i-1)');
+%         xppp = quadprog(Q,pkX,[],[],[],[],[],[],[],options);
+%         yppp = quadprog(Q,pkY,[],[],[],[],[],[],[],options);
+%     for i=1:(Nsteps+4)*N
+%         xkHist(:,i+1) = A*xkHist(:,i) + B*xppp(i);
+%         ykHist(:,i+1) = A*ykHist(:,i) + B*yppp(i);
+%         ZMPRefX(i+1) = xkHist(1,i+1) - (z/g)*xkHist(2,i+1);
+%         ZMPRefY(i+1) = ykHist(1,i+1) - (z/g)*ykHist(2,i+1);
+%     end
+    Xref = [xkHist;ykHist];
+    ZMPRef = [ZMPRefX;ZMPRefY];
+    tref = 0:1:(Nsteps+4)*N;
+    tref = tref*T;
+end

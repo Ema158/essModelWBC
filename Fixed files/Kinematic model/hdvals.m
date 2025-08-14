@@ -1,0 +1,24 @@
+function hd=hdvals
+h=zeros(20,1);
+h(1)=0.2708;%z del COM
+h(2)=-0.0240;% x del pie
+h(3)=0.1071;% y del pie
+h(4)=-0.0038;% z del pie(suela)
+h(5)=0.0478;%roll del pie
+h(6)=-0.0107;%pitch del pie
+h(7)=0.4405;%yaw del pie
+h(8)=0.0251;%roll del torso
+h(9)=0.2203;%pitch del torso
+h(10)=0.2259;%yaw deltorso
+h(11)=1.6;%q13
+h(12)=0;%q14
+h(13)=1.6;%q15
+h(14)=0.2;%q16
+h(15)=1.6;%q17
+h(16)=0;%q18
+h(17)=-1.6;%q19
+h(18)=-0.2;%q20
+h(19)=0;%q21
+h(20)=0;%q22
+hd=h;
+end

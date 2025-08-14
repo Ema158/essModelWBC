@@ -1,0 +1,167 @@
+% ============================================
+% This file give us the trajectory of the CoM from the end of the previous step up to the end of the current step.
+% Also give us the final position and velocity of the joints and all the structure in "robot".
+% Namely: the last position of the previous step of the robot is given (in robot structure) -> The impact is computed -> 
+%         the dynamic of the CoM is computed (ZeroDynamics) -> The last position of the robot for the current step is given
+% After impact, re-labelling of the joints is performed.
+
+function [tSS,tDS,XtSS,XtDS] = robot_step_EssModel_tAccDS(X_final,gait_parametersSS,gait_parametersDS,j)
+%Relabelling + Simulation of one step of the robot 
+
+% ==============================================================================================
+% Options
+% ----------------------------------------------------------------------------------------------
+% NOTE The number of iterations performed by the solver are counted by "contB". This is used to stop the solver if the
+% robot doesn't perform a step after a determinated number of iterations (this is done in "PEventsHZDtime")
+global contB  % To show the number of iterations in PEVents and stop the solver if necessary
+contB =  1;            % To count the number of iterations performed by the solver (recommended)
+% DisplayIterNumber = []; % To DISPLAY the information of the number of iteration performed by the solver.. Empty-> Not display anything
+% ==============================================================================================
+global contD OutOfWorkSpace
+contD = []; % Every time the robot is out of the workspace and "PEvents" is called, 'contD' is used to stop de integration 
+
+global robot gait_parameters
+global Xref ZMPRef px py
+
+T = gait_parametersSS.T;
+S = gait_parametersSS.S;
+D = gait_parametersSS.D;
+
+qf_final = X_final(1:12);
+qfp_final = X_final(13:24);
+%% Computation of the Impact and Rellabelling
+% ====================================================================
+% By using the final position and velocity of the CoM at time T, we compute the final joint positions and velocities
+% of the robot in order to compute the impact
+[q_end,qp_end,~,~,~] = JointsPosVel_from_CoMPosVel_HZDtime(qf_final,qfp_final,robot,gait_parametersSS,T);
+% By using final joints information, the structure of the robot is updated, i.e Jacobians,transformation matrices, etc.
+robot = robot_move(robot,q_end);
+robot.qD = qp_end;
+% % ----------------------------------------------------------------
+% % Configuration of the robot before impact
+% figure(4)
+% robot_draw(robot,0,0)             % Supported on the right foot
+% view(3) % to assigne a "standard" view in 3D
+% axis equal 
+
+% ==================================================================
+% Checking velocity of free foot before impact
+[~, Qp] = current_states(robot);
+fprintf('The linear velocity of the free foot before impact is:\n xp = %f \n yp = %f \n zp = %f \n',Qp(1),Qp(2),Qp(3));
+% ==================================================================
+
+[qfp0,robot] = impact_Pos_Vel(robot,gait_parametersSS.v_foot_f); %
+% The New robot position and velocity of the joints after impact and
+% The New CoM velocity after impact are computed
+% Computation of the initial position of the CoM after impact
+xp0 = qfp0(1);    % Initial velocity in X of the CoM for the new step j+1
+yp0 = qfp0(2);    % Initial velocity in Y of the CoM for the new step j+1
+q13p0 = qfp0(3); q14p0 = qfp0(4); q15p0 = qfp0(5); q16p0 = qfp0(6); 
+q17p0 = qfp0(7); q18p0 = qfp0(8); q19p0 = qfp0(9); q20p0 = qfp0(10);
+Rollp0 = qfp0(11); Pitchp0 = qfp0(12); CAMx0 = -X_final(25); CAMy0 = X_final(26);
+% ====================================================================
+% -------------------------------------------------------------
+% COMPUTING POLYNOMIALS
+% Computing of Coefficients for the polinomials by taking into account the states after impact
+gait_parametersSS.transition = true;
+PolyCoeff = Coeff_DesiredTrajectories_t_ver2(robot,gait_parametersSS);
+gait_parametersSS.PolyCoeff = PolyCoeff;   
+%
+gait_parametersDS.transition = false;
+PolyCoeff = Coeff_DesiredTrajectories_t_ver2(robot,gait_parametersDS);
+gait_parametersDS.PolyCoeff = PolyCoeff;  
+% Just to chck if the all the controlled variables are in the ZERO DYNAMICS MANIFOLD
+ZeroDynamics_impactTime_test(robot.CoM,qfp0,robot,gait_parametersSS);
+% ---------------------------------------------------------------------------------
+
+%% Evaluating the dynamics of the Essential model
+% ====================================================================
+% Initial states (after impact)
+Hips = hipsAttitude(robot);
+X0 = [robot.CoM(1:2); robot.q(13:16); robot.q(18:21); Hips(1:2)';
+    xp0; yp0; q13p0; q14p0; q15p0; q16p0; q17p0; q18p0; q19p0; q20p0; Rollp0; Pitchp0; CAMx0; CAMy0];
+% % -----------------------------------------------------------------------------------------------
+% % ----------------------------------------------------------------------------------------------------
+gait_parameters = gait_parametersSS;
+TSS = gait_parametersSS.T;
+time_step = gait_parametersSS.Tmuestreo;
+samplesSS = TSS/time_step;
+current_time = 0;
+XtSS = zeros(samplesSS+1,length(X0));
+XtSS(1,:) = X0';
+%
+TDS = gait_parametersDS.T;
+samplesDS = TDS/time_step;
+for i=1:samplesSS
+    if OutOfWorkSpace == true
+      break;
+    end
+    aux = (j+1)*(samplesSS+samplesDS);
+    timespan = [current_time, current_time + time_step];
+    [Xref,ZMPRef] = MpcLIPOnlineV3(gait_parameters,[X0(1);X0(2);X0(13);X0(14)],robot.Zref,robot.ZMax,robot.ZMin,i,robot.Px,robot.Pu);
+    px(i+aux) = ZMPRef(1) + S*(j);
+    if mod(j,2)==1
+        py(i+aux) = -ZMPRef(2) + D;
+    else
+        py(i+aux) = ZMPRef(2);
+    end
+    XtSSAux = ode4(@dynam_HZDtimeLipReferenceOnlineAccSS,timespan,X0);
+    XtSS(i+1,:) = XtSSAux(end,:);
+    X0 = XtSSAux(end,:)';
+    current_time = current_time + time_step;
+end
+tSS = 0:time_step:gait_parametersSS.T;
+
+gait_parameters = gait_parametersDS;
+X0 = XtSS(end,:)';
+time_step = gait_parametersDS.Tmuestreo;
+current_time = 0;
+XtDS = zeros(samplesDS+1,length(X0));
+XtDS(1,:) = X0';
+for i=1:samplesDS
+    if OutOfWorkSpace == true
+      break;
+    end
+    aux = (j+1)*(samplesSS+samplesDS);
+    timespan = [current_time, current_time + time_step];
+    [Xref,ZMPRef] = MpcLIPOnlineV3(gait_parameters,[X0(1);X0(2);X0(13);X0(14)],robot.Zref,robot.ZMax,robot.ZMin,i+samplesSS,robot.Px,robot.Pu);
+    px(i+aux+samplesSS) = ZMPRef(1) + S*(j);
+    if mod(j,2)==1
+        py(i+aux+samplesSS) = -ZMPRef(2) + D;
+    else
+        py(i+aux+samplesSS) = ZMPRef(2);
+    end
+    XtDSAux = ode4(@dynam_HZDtimeLipReferenceOnlineAccDS,timespan,X0);
+    XtDS(i+1,:) = XtDSAux(end,:);
+    X0 = XtDSAux(end,:)';
+    current_time = current_time + time_step;
+end
+tDS = 0:time_step:TDS;
+%% Configuration of the last canfiguration of the robot
+% Computing of the joints velocities and positions at the end of the step
+if isempty(OutOfWorkSpace) % If the CoM of the robot is always inside the workspace of the robot....
+    qf_final = XtDS(end,1:12)'; % CoM position at the end of the step
+    qfp_final = XtDS(end,13:24)'; % CoM velocity at the end of the step
+    [q,qp,~,~,~] = JointsPosVel_from_CoMPosVel_HZDtime(qf_final,qfp_final,robot,gait_parametersDS,tDS(end));
+    robot = robot_move(robot,q); % All the structure of the robot is updated based on the New Final joint positions
+    robot.qD = qp;               % New Final joint velocities of the robot
+    % Configuration of the robot at the end of the step
+%     figure(4)
+%     robot_draw(robot,0,0)             % Supported on the right foot
+%     view(3) % to assigne a "standard" view in 3D
+%     axis equal
+    % ---------------------------------------------------------
+else 
+    disp('Robot configuration is OUT OF WORKSAPCE at the end of the step in "robot_step...m". Robot configuration RE-Initialized')
+    robot = genebot();     
+end 
+
+global noLanding
+if ~(isempty(noLanding) || noLanding==0) % if there was no impact
+    disp('Robot configuration is INACCESSIBLE in "robot_step...m". Robot configuration RE-Initialized')
+    robot = genebot();  
+end
+
+
+end
+
