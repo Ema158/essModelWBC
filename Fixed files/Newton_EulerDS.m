@@ -1,20 +1,4 @@
-function [F0,M0,Tau] = Newton_Euler(q,qD,qDD,F1,W3,W4)
-  switch nargin
-      case 3
-          W1 = [0;0;0;0;0;0];
-          W3 = [0;0;0;0;0;0];
-          W4 = [0;0;0;0;0;0];
-      case 4
-            W1 = F1;
-            W3 = [0;0;0;0;0;0];
-            W4 = [0;0;0;0;0;0];
-            
-      case 5
-            W1 = [0;0;0;0;0;0];
-        otherwise
-            
-   end
-
+function [F0,M0,Tau] = Newton_EulerDS(q,qD,qDD,FR)
 %NEWTON_EULER Algorithm to compute torques (model single mass)
 PI=Mass_information();
 %init;
@@ -144,10 +128,10 @@ end
 
 %Backward algorithm 
 % =========================================
-% f =[0;0;0];
-f = W4(1:3,1);
-% m = [0;0;0];
-m = W4(4:6,1);
+f =[0;0;0];
+% f = W4(1:3,1);
+m = [0;0;0];
+% m = W4(4:6,1);
 
 %Tree 4
 tree = tree4;
@@ -173,10 +157,10 @@ f_temp = f;
 m_temp = m;
 
 %Tree 3
-% f =[0;0;0];
-f = W3(1:3,1);
-% m = [0;0;0];
-m =W3(4:6,1);
+f =[0;0;0];
+% f = W3(1:3,1);
+m = [0;0;0];
+% m =W3(4:6,1);
 tree = tree3;
 for i = numel(tree):-1:1
     if i == numel(tree)
@@ -215,12 +199,9 @@ f_temp3= f;
 m_temp3 = m;
 
 %Tree 1
-
-% f =[0;0;0];
-f = -W1(1:3,1);
-% m = [0;0;0];
-m = -W1(4:6,1);
-
+R014 = robot.T(1:3,1:3,14);
+f = -R014*FR(1:3)';
+m = -R014*FR(4:6)';
 
 tree = tree1;
 for i = numel(tree):-1:1
