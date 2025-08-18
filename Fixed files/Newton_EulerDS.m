@@ -199,9 +199,9 @@ f_temp3= f;
 m_temp3 = m;
 
 %Tree 1
-R014 = robot.T(1:3,1:3,14);
-f = -R014*FR(1:3)';
-m = -R014*FR(4:6)';
+
+f = -FR(1:3)';
+m = -FR(4:6)';
 
 tree = tree1;
 for i = numel(tree):-1:1

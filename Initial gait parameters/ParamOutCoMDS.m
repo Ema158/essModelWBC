@@ -9,7 +9,7 @@ function   Nao_param = ParamOutCoMDS()
 %     Hip_Yaw_i = 0.15  instead of Hip_Yaw_i = 0.2;
 %% Gait parameters 
 % ============================
-T = 2;   %8  1.5    % Time step
+T = 3;   %8  1.5    % Time step
 Thorizon = 0.5;
 Tmuestreo = 0.01; %Time step for optimization in the LIP model.
 S = 0.00;         % Step length 0.1
@@ -105,9 +105,9 @@ gait_parameters.Pitch_ffoot_inc = Pitch_ffoot_inc;
 %Pesos QP WBC
 Q = eye(12,12); %12 free variables and 6 external Forces/Moments
 %
-Q(3:10,3:10) = 3e-5*eye(8,8); % 3e-5
-Q(11,11) = 6e-4; % $Push Recovery
-Q(12,12) = 6e-4; % $Push Recovery 
+% Q(3:10,3:10) = 3e-5*eye(8,8); % 3e-5
+% Q(11,11) = 6e-4; % $Push Recovery
+% Q(12,12) = 6e-4; % $Push Recovery 
 %
 QF = 0.01*eye(6,6); %Weight matrix for reaction forces
 %
@@ -139,7 +139,7 @@ OptionContVar = 1;
 % -------------------------------------------------------------------------------------------------
 %% Cyclic motion (Dx, Dy, xpf, ypf) and optimized parameters
 Rcyc = [0,0,1.8,-0.15,1.6,0.15,1.8,0.15,-1.6,-0.15,0,0,... %x,y,q13,q14,q15,q16,q17,q18,q19,q20,
-        0,0.0,0,0,0,0,0,0,0,0,0,0,0,0];   %xp,yp,q13p,q14p,q15p,q16p,q17p,q18p,q19p,q20p,CAM                        
+        0.1,0.0,0,0,0,0,0,0,0,0,0,0,0,0];   %xp,yp,q13p,q14p,q15p,q16p,q17p,q18p,q19p,q20p,CAM                        
 % Creating a structure for the parameters
 Nao_param.gait_parameters = gait_parameters;
 Nao_param.ControlledVariableOption = OptionContVar;

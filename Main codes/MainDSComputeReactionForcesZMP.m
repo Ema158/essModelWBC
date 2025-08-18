@@ -16,7 +16,7 @@ disp([Hour ' -> Reading data']);
 % -----------------------------------------------   
 DataName = 'InfoNAO_OutCoMDS';
 
-anim = 1; % Do you want animation? 1-> yes, 0-> no
+anim = 0; % Do you want animation? 1-> yes, 0-> no
 % -------------------------------------------------------------------------------------------------
 % CHOSING CONTROLLED VARIABLE FILES
 % -------------------------------------------------------------------------------------------------
@@ -65,12 +65,17 @@ samplesAct = 0;
     Tau = zeros(robot.joints,samples);
     CMP = zeros(2,samples);
     CAM = zeros(2,samples);
-
+    R014 = robot.T(1:3,1:3,14);
     for i = 1:samples
         % "Newton_Euler.m" Algorithm
-        [F(:,i),M(:,i),Tau(:,i)]= Newton_EulerDS(qt(:,i),qDt(:,i),qDDt(:,i),FRt(i,:));
-        ZMP(1,i) = -M(2,i)/F(3,i) - 0.095;
-        ZMP(2,i) =  M(1,i)/F(3,i); 
+        FL = (R014*FRt(i,1:3)')';
+        ML = (R014*FRt(i,4:6)')';
+        wrenchL = [FL,ML];
+        [F(:,i),M(:,i),Tau(:,i)]= Newton_EulerDS(qt(:,i),qDt(:,i),qDDt(:,i),wrenchL);
+%         ZMP(1,i) = -M(2,i)/F(3,i) - 0.095;
+%         ZMP(2,i) =  M(1,i)/F(3,i); 
+        ZMP(1,i) = (0*FL(3) - ML(2) - M(2,i))/(F(3,i)+FL(3));
+        ZMP(2,i) = (0.1*FL(3) + ML(1) + M(1,i))/(F(3,i)+FL(3));
         CMP(1,i) = Xt(i,1) - (F(1,i)/F(3,i))*gait_parameters.z_i;
         CMP(2,i) = Xt(i,2) - (F(2,i)/F(3,i))*gait_parameters.z_i;
         CAM(1,i) = (ZMP(2,i)-Xt(i,2))*F(3,i) + F(2,i)*gait_parameters.z_i;
@@ -157,7 +162,7 @@ disp([Hour ' -> Plotting...']);
 % In the variable "plots" we chose which plot we want to show...
 plots(1) = 0;
 plots(2) = 1;
-plots(3) = 0;
+plots(3) = 1;
 plots(4) = 1;
 plots(5) = 1;
 % plots(1) = 0;

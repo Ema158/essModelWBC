@@ -16,7 +16,8 @@ global contB
 %  ---------------------
 global OutOfWorkSpace
 if isempty(OutOfWorkSpace)
-    qfpp = Desired_qfppDS(Xref,ZMPd,robot,[qf;qfp],gait_parameters,t);
+%     qfpp = Desired_qfppDS(Xref,ZMPd,robot,[qf;qfp],gait_parameters,t);
+    qfpp = Desired_qfppDS_newConstraint(Xref,ZMPd,robot,[qf;qfp],gait_parameters,t);
 else
     qfpp = zeros(12,1);
     fprintf('Iteration %d. CoM OUT of WORKSPACE!. Essential model NOT computed.  \n',contB);
