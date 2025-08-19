@@ -16,7 +16,7 @@ disp([Hour ' -> Reading data']);
 % -----------------------------------------------   
 DataName = 'InfoNAO_OutCoMDS';
 
-anim = 0; % Do you want animation? 1-> yes, 0-> no
+anim = true; % Do you want animation? 1-> yes, 0-> no
 % -------------------------------------------------------------------------------------------------
 % CHOSING CONTROLLED VARIABLE FILES
 % -------------------------------------------------------------------------------------------------

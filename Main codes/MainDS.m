@@ -117,10 +117,10 @@ horizon = round(gait_parameters.Thorizon/gait_parameters.Tmuestreo);
 muestrasTotal = round(gait_parameters.T/gait_parameters.Tmuestreo);
 robot = genebotV6ZMPk(gait_parameters,horizon);
 [robot.Zref,robot.tRef] = ZMPReferenceEquilibriumV2(muestrasTotal,horizon);
-% robot.ZMax = robot.Zref + [0.05;0.02]; %Standing y
-% robot.ZMin = robot.Zref - [0.04;0.02]; %Standing y
-robot.ZMax = robot.Zref + [0.1;0.1]; %Standing y
-robot.ZMin = robot.Zref - [0.1;0.1]; %Standing y
+robot.ZMax = robot.Zref + [0.05;0.02]; %Standing y
+robot.ZMin = robot.Zref - [0.04;0.02]; %Standing y
+% robot.ZMax = robot.Zref + [0.1;0.1]; %Standing y
+% robot.ZMin = robot.Zref - [0.1;0.1]; %Standing y
 % Computation of the initial coefficients the polinomial trajectories for the controlled variables. 
 % These coefficients are changed inmediately after the transition (really necessary when there is an impact)
 gait_parameters.transition = false; 
